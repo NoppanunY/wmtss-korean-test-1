@@ -5,10 +5,7 @@ import { Icon } from "leaflet";
 import axios from "axios";
 
 export default class App extends Component {
-  // const data = 
-
   render() {
-    console.log("Complete!!")
     return (
       <div>
          <MapContainer center={[13.2848334, 100.9179506]} zoom={14} scrollWheelZoom={true}>
@@ -16,11 +13,7 @@ export default class App extends Component {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker position={[13.281353, 100.927505]}>
-            <Popup>
-              
-            </Popup>
-          </Marker>
+          <Marker position={[13.281353, 100.927505]}></Marker>
         </MapContainer>
       </div>
     )
