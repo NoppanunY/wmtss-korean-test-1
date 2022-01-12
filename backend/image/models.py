@@ -7,4 +7,4 @@ class Image(models.Model):
     bin_id = models.ForeignKey(Bin, on_delete=models.DO_NOTHING)
 
     class Meta:
-        db_table = "image"
+        db_table = "wmtss_image"

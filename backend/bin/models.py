@@ -14,7 +14,7 @@ class Bin(models.Model):
     tag = models.ForeignKey(Tag, on_delete=models.DO_NOTHING)
 
     class Meta:
-        db_table = "bin"
+        db_table = "wmtss_bin"
 
     def __str__(self):
         return "{}:{} ({})".format(self.lat, self.lng, self.description)
