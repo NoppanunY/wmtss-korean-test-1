@@ -1,11 +1,10 @@
-import React, {useState, useEffect, Component} from "react";
+import React, {useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { MapContainer, TileLayer, Marker, Popup, ZoomControl} from 'react-leaflet';
-import { Icon } from "leaflet";
+import { MapContainer, TileLayer, Marker} from 'react-leaflet';
 import axios from "axios";
 import './App.css';
 
-import { Button, Collapse, Card } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 import Modal from './components/Modal';
 import CreateBin from './components/CreateBin';
@@ -26,6 +25,7 @@ export default function App() {
   const [error, setError] = useState(null);
   const [criteria, setCriteria] = useState({});
 
+  const [activeSidebar, setActiveSidebar] = useState(false);
   const [activeModal, setActiveModal] = useState({ name: "", type: "", active: false });
 
   // Setting up Modal
@@ -71,6 +71,13 @@ export default function App() {
 
   return (
     <div className="app">
+      { activeSidebar && (
+        <SideBar 
+          criteria={criteria}
+          hideSidebar={() => {setActiveSidebar(false)}}
+        ></SideBar>
+      )}
+
       <MapContainer center={[13.2848334, 100.9179506]} zoom={14} scrollWheelZoom={true} zoomControl={false}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -83,7 +90,11 @@ export default function App() {
               <Marker key={bin.id} position={[bin.lat, bin.lng]} 
                 eventHandlers={{
                   click: (e) => {
-                    console.log('marker clicked', bin)
+                    // console.log('marker clicked', bin)
+                    setCriteria({
+                      "id": bin.id
+                    });
+                    setActiveSidebar(true);
                   },
                 }}
               ></Marker>

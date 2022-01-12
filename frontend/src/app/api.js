@@ -12,6 +12,11 @@ function getBins(){
     return response;
 }
 
+function getBinDetail(id){
+    const response = axios.get(`api/bin/${id}`);
+    return response;
+}
+
 function getCreateBin({ lat, lng, location, type, date, time, description, tag}){
     const response = axios.post('api/bin/', {
         "lat": lat,
@@ -30,5 +35,6 @@ function getCreateBin({ lat, lng, location, type, date, time, description, tag})
 export { 
     getTags, 
     getBins,
+    getBinDetail,
     getCreateBin
 };
