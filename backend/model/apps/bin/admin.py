@@ -11,7 +11,11 @@ class BinAdmin(admin.ModelAdmin):
         'date', 
         'time', 
         'description', 
-        'tag',
-    )
+        'get_tag',
+    )   
+
+    def get_tag(self, obj):
+        return obj.tag.name
+    get_tag.short_description = 'Tag Name'
 
 admin.site.register(Bin, BinAdmin)

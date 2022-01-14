@@ -11,10 +11,14 @@ class Bin(models.Model):
     time = models.TimeField(default=datetime(2008, 1, 31, 20, 00, 00))
     description = models.TextField(default=None, blank=True, null=True)
     
-    tag = models.ForeignKey(Tag, on_delete=models.DO_NOTHING)
+    tag = models.ForeignKey(Tag, on_delete=models.DO_NOTHING, related_name='tag_name')
 
     class Meta: 
         db_table = "wmtss_bin"
 
     def __str__(self):
         return "{}:{} ({})".format(self.lat, self.lng, self.description)
+
+    @property
+    def tag_name(self):
+        return self.tag.name

@@ -16,9 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from bin import views as binModel
-from image import views as imageModel
-from tag import views as tagModel
+from model.apps.bin import views as binModel
+from model.apps.image import views as imageModel
+from model.apps.tag import views as tagModel
 
 router = routers.DefaultRouter()
 
