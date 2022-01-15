@@ -9,6 +9,7 @@ import {
 
   
 registerLocale('pt-BR', ptBR)
+
 const CreateBin = props => {
     const initialData = {
         "lat": "",

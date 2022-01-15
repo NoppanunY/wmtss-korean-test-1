@@ -22,7 +22,6 @@ export default function App() {
 
   const [loading, setLoading] = useState(false);
   
-  const [error, setError] = useState(null);
   const [criteria, setCriteria] = useState({});
 
   const [activeSidebar, setActiveSidebar] = useState(false);
@@ -67,10 +66,10 @@ export default function App() {
     fetchBins();
   }, []);
 
-  if (error) return `Error : ${error.message}`;
-
   return (
     <div className="app">
+      <NavbarTop/>
+
       { activeSidebar && (
         <SideBar 
           criteria={criteria}
