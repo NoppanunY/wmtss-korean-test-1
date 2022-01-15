@@ -159,7 +159,7 @@ const CreateBin = props => {
                         defaultValue={bin.tag}
                         onChange={(event) => {setBin({ ...bin, tag: event.target.value })}}
                         required>
-                        <option value="" disabled hidden>---</option>
+                        <option value="" selected={!bin.tag} disabled hidden>---</option>
                         {options.map(el => (
                             <option key={el.id} value={el.id}>{el.name}</option>
                         ))}
