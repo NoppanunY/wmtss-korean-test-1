@@ -4,14 +4,13 @@ import Moment from 'moment';
 import ptBR from 'date-fns/locale/pt-BR';
 
 import {
-    getTags
+    getTags,
+    getBinDetail
 } from './../../app/api';
-
-import "./style.css";
-
+  
 registerLocale('pt-BR', ptBR)
 
-const CreateBin = props => {
+const UpdateBin = props => {
     const initialData = {
         "lat": "",
 		"lng": "",
@@ -32,6 +31,27 @@ const CreateBin = props => {
         "lng": "^[+-]?((([1-9]?[0-9]|1[0-7][0-9])(\\.[0-9]{1,7})?)|180(\\.0{1,7})?)$"
     }
 
+    const fetchBinDetail = async () => {
+        try {
+            await getBinDetail(props.criteria.id)
+            .then((res) => {
+                let time = new Date(),
+                    parts = res.data.time.match("(\\d+)\\:(\\d+)\\:(\\d+)"),
+                    hours = parts[1],
+                    minute = parts[2],
+                    second = parts[3];
+
+                time.setHours(hours);
+                time.setMinutes(minute);
+                time.setSeconds(second);
+
+                setBin({...res.data, date: Date.parse(res.data.date), time: time });
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     const fetchTags = async () => {
         try {
             await getTags()
@@ -43,7 +63,13 @@ const CreateBin = props => {
         }
     }
 
+    const remove = event => {
+        props.deleteBin(bin.id);
+        props.setActiveModal({ active: false });
+    }
+
     useEffect(() => {
+        fetchBinDetail();
         fetchTags();        
     }, [])
 
@@ -52,22 +78,21 @@ const CreateBin = props => {
         setBin({...bin, [name]: value});
     }
 
-    const create = event => {
+    const update = event => {
         // let isValid = true;
-        // console.log(bin);
         event.preventDefault();
         setIsSumnit("was-validated");
         // console.log(bin);
         
         // if(!bin["lat"]) return
         // if(typeof(bin["lat"]) !== "undefined") 
-            if(!bin["lat"].match(regex.lat)) return
+            if(String(!bin["lat"]).match(regex.lat)) return
 
         // if(!bin["lng"]) return
         // if(typeof(bin["lng"]) !== "undefined") 
-            if(!bin["lng"].match(regex.lng)) return
+            if(String(!bin["lng"]).match(regex.lng)) return
         
-        props.createBin({...bin, 
+        props.updateBin(bin.id, {...bin, 
             date: Moment(bin.date).format('YYYY-MM-DD'),
             time: Moment(bin.time).format('hh:mm:ss')
         });
@@ -179,11 +204,11 @@ const CreateBin = props => {
                 </div>
             <div className="button">
                 <button type="button" className="btn btn-light" onClick={cancel}>Cancel</button>
-                <button type="button" className="btn btn-secondary" onClick={clear}>Clear</button>
-                <button type="button" className="btn btn-success" onClick={create}>Save</button>
+                <button type="button" className="btn btn-danger" onClick={remove}>Delete</button>
+                <button type="button" className="btn btn-success" onClick={update}>Save</button>
             </div>
         </form>
     )
 }
 
-export default CreateBin;
+export default UpdateBin;

@@ -1,19 +1,21 @@
 import React, {useState, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MapContainer, TileLayer, Marker} from 'react-leaflet';
-import axios from "axios";
 import './App.css';
 
 import { Button } from 'react-bootstrap';
 
 import Modal from './components/Modal';
 import CreateBin from './components/CreateBin';
+import UpdateBin from './components/UpdateBin';
 import SideBar from './components/SideBar';
 import NavbarTop from './components/NavbarTop';
 
 import {
   getBins,
-  getCreateBin
+  getCreateBin,
+  getUpdatedBin,
+  getDeleteBin
 } from './app/api';
 
 export default function App() {
@@ -35,10 +37,51 @@ export default function App() {
   // Create Bin from API
   const createBin = async bin => {
     setLoading(true);
+    console.log(bin);
     try {
       await getCreateBin(bin)
       .then(res => {
         dispatch({ type: "ADD_BIN", data: res.data })  
+      });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // Delete Bin from API
+  const deleteBin = async id => {
+    setLoading(true);
+    console.log(id);
+    try {
+      await getDeleteBin(id)
+      .then(res => {
+        dispatch({
+          type: "SET_BINS",
+          data: bins.filter(bin => bin.id !== id)
+        });
+      });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // Delete Bin from API
+  const updateBin = async (id, updateBin) => {
+    setLoading(true);
+    console.log(id);
+    try {
+      await getUpdatedBin(id, updateBin)
+      .then(res => {
+        dispatch({
+          type: "SET_BINS",
+          data: bins.map(bin =>
+            bin.id === id ? Object.assign(bin, updateBin) : bin
+          )
+        });
       });
     } catch (err) {
       console.log(err);
@@ -74,6 +117,7 @@ export default function App() {
         <SideBar 
           criteria={criteria}
           hideSidebar={() => {setActiveSidebar(false)}}
+          setModal={setModal}
         ></SideBar>
       )}
 
@@ -89,7 +133,6 @@ export default function App() {
               <Marker key={bin.id} position={[bin.lat, bin.lng]} 
                 eventHandlers={{
                   click: (e) => {
-                    // console.log('marker clicked', bin)
                     setCriteria({
                       "id": bin.id
                     });
@@ -105,7 +148,10 @@ export default function App() {
       {activeModal.active && (
         <Modal activeModal={activeModal} closeModal={() => {setActiveModal(false)}}>
           { activeModal.type === "ADD_BIN" && (
-            <CreateBin createBin={createBin} setActiveModal={setActiveModal}/>
+            <CreateBin createBin={createBin} setActiveModal={setActiveModal} />
+          )}
+          { activeModal.type === "UPDATE_BIN" && (
+            <UpdateBin criteria={criteria} updateBin={updateBin} deleteBin={deleteBin} setActiveModal={setActiveModal} />
           )}
         </Modal>
       )}

@@ -17,7 +17,7 @@ function getBinDetail(id){
     return response;
 }
 
-function getCreateBin({ lat, lng, location, type, date, time, description, tag}){
+function getCreateBin({ lat, lng, location, type, date, time, description, tag }){
     const response = axios.post('api/bin/', {
         "lat": lat,
         "lng": lng,
@@ -32,9 +32,32 @@ function getCreateBin({ lat, lng, location, type, date, time, description, tag})
     return response;
 }
 
+function getUpdatedBin(id, bin) {
+    const response = axios.put(`api/bin/${id}/`, {
+        "lat": bin.lat,
+        "lng": bin.lng,
+        "location": bin.location,
+        "type": bin.type,
+        "date": bin.date,
+        "time": bin.time,
+        "description": bin.description,
+        "tag": bin.tag
+    });
+  
+    return response;
+  }
+
+function getDeleteBin(id){
+    const response = axios.delete(`api/bin/${id}`);
+    return response;
+}
+
+
 export { 
     getTags, 
     getBins,
     getBinDetail,
-    getCreateBin
+    getCreateBin,
+    getUpdatedBin,
+    getDeleteBin
 };
