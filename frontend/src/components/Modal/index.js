@@ -8,7 +8,7 @@ const Modal = props => {
 
     return (
         <div className='modal-backdrop' onClick={() => {closeModal()}}>
-            <div className="modal display-block" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle">
+            <div className="modal-dialog modal-xl" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle">
                 <div className="modal-dialog-centered modal-dialog modal-xl" role="document">
                     <div className="modal-content" onClick={e => {e.stopPropagation()}}>
                         <div className="modal-header">
@@ -19,6 +19,7 @@ const Modal = props => {
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
     );

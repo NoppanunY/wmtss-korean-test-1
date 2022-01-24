@@ -8,5 +8,6 @@
   top: 20px;
   right: 20px;
   padding: 10px;
-  z-index: 400;
+  z-index: 500;
+  border-radius: 50%;
 }

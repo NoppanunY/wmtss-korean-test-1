@@ -1,48 +1,50 @@
-.sidebar-wrapper{
-    background: white;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    min-width: 25%;
-    max-width: 25%;
-    z-index: 999;
-    border-radius: 15px;
+.sidebar-wrapper {
+  background: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  min-width: 25%;
+  max-width: 25%;
+  z-index: 999;
+  border-radius: 15px;
 }
 
 /* Header  */
 
 .sidebar-header {
-    position: relative;
+  position: relative;
 }
 
 .image-header {
-    height: 30%;
+  height: 30%;
 }
 
 .close-btn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-top: 10px;
-    margin-right: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 10px;
+  margin-right: 10px;
+  border-radius: 50%;
 }
 
 /* Body */
 .sidebar-body {
-    position: relative;
+  position: relative;
 }
 
 .edit-btn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-top: 10px;
-    margin-right: 10px;
-    z-index: 99;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 10px;
+  margin-right: 10px;
+  z-index: 99;
+  border-radius: 50%;
 }
 
 .content {
-    margin-top: 10px;
-    margin-left: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
 }
