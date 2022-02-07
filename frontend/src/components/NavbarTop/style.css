@@ -19,3 +19,8 @@
 #inputSearch {
   box-shadow: 2px 2px 4px #000000;
 }
+
+#nav1 {
+  position: absolute;
+  z-index: 600;
+}
