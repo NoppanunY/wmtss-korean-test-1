@@ -34,14 +34,29 @@
   position: relative;
 }
 
-.edit-btn {
+#btnClose {
+  background: none;
   position: absolute;
   top: 0;
   right: 0;
   margin-top: 10px;
   margin-right: 10px;
   z-index: 99;
-  border-radius: 50%;
+  font-size: 8px;
+  text-align: center;
+  border: none;
+}
+
+#btnEdit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 5px;
+  margin-right: 10px;
+  z-index: 99;
+  font-size: 8px;
+  text-align: center;
+  border: none;
 }
 
 .content {

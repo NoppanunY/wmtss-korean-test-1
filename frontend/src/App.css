@@ -3,11 +3,87 @@
   height: 100vh;
 }
 
-.button-insert {
+#btnAdd {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  bottom: 450px;
+  right: 16px;
   padding: 10px;
-  z-index: 500;
-  border-radius: 50%;
+  z-index: 600;
+  border: none;
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  border-radius: 35px;
+  font-size: 12px;
+  text-align: center;
+  background: white;
+  box-shadow: 2px 2px 4px #000000;
+}
+
+#btnBin1 {
+  position: absolute;
+  bottom: 350px;
+  right: 16px;
+  padding: 10px;
+  z-index: 600;
+  border: none;
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  border-radius: 35px;
+  font-size: 12px;
+  text-align: center;
+  background: white;
+  box-shadow: 2px 2px 4px #000000;
+}
+
+#btnBin2 {
+  position: absolute;
+  bottom: 250px;
+  right: 16px;
+  padding: 10px;
+  z-index: 600;
+  border: none;
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  border-radius: 35px;
+  font-size: 12px;
+  text-align: center;
+  background: white;
+  box-shadow: 2px 2px 4px #000000;
+}
+
+#btnBin3 {
+  position: absolute;
+  bottom: 150px;
+  right: 16px;
+  padding: 10px;
+  z-index: 600;
+  border: none;
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  border-radius: 35px;
+  font-size: 12px;
+  text-align: center;
+  background: white;
+  box-shadow: 2px 2px 4px #000000;
+}
+
+#btnBin4 {
+  position: absolute;
+  bottom: 50px;
+  right: 16px;
+  padding: 10px;
+  z-index: 600;
+  border: none;
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  border-radius: 35px;
+  font-size: 12px;
+  text-align: center;
+  background: white;
+  box-shadow: 2px 2px 4px #000000;
 }

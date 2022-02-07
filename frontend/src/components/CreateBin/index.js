@@ -177,10 +177,20 @@ const CreateBin = props => {
                     value={bin.description}
                     onChange={onInputChange}/>
                 </div>
+                            
             <div className="button">
-                <button type="button" className="btn btn-light" onClick={cancel}>Cancel</button>
-                <button type="button" className="btn btn-secondary" onClick={clear}>Clear</button>
-                <button type="button" className="btn btn-success" onClick={create}>Save</button>
+                <div class="form-group row">
+                    <div class="col-md-9"></div>
+                    <div class="col-md-1">
+                    <button type="button" className="btn btn-light" onClick={cancel}>Cancel</button>
+                    </div>
+                    <div class="col-md-1">
+                    <button type="button" className="btn btn-secondary" onClick={clear}>Clear</button>
+                    </div>
+                    <div class="col-md-1">
+                    <button type="button" className="btn btn-success" onClick={create}>Save</button>
+                    </div>
+                </div>
             </div>
         </form>
     )
