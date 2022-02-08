@@ -5,7 +5,7 @@ class ImageAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'image',
-        'bin_id'
+        'bin'
     )
 
 admin.site.register(Image, ImageAdmin)

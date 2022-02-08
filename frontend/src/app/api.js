@@ -52,12 +52,23 @@ function getDeleteBin(id){
     return response;
 }
 
+// Image
+function getCreateImage(image){
+    const response = axios.post('api/image/', {
+        "image": image
+    });
+
+    return response;
+}
 
 export { 
     getTags, 
+
     getBins,
     getBinDetail,
     getCreateBin,
     getUpdatedBin,
-    getDeleteBin
+    getDeleteBin,
+
+    getCreateImage,
 };
