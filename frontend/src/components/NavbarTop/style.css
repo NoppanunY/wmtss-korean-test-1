@@ -4,23 +4,77 @@
 }
 
 #btnNav {
-  border-radius: 13px;
-  padding: 5px;
-  float: left;
-  box-shadow: 2px 2px 4px #000000;
-}
-
-.navbar-toggler {
-  border-radius: 20px;
-  padding: 5px;
-  box-shadow: 2px 2px 4px #000000;
-}
-
-#inputSearch {
-  box-shadow: 2px 2px 4px #000000;
-}
-
-#nav1 {
   position: absolute;
-  z-index: 600;
+  z-index: 900;
+  border-radius: 30px;
+  padding: 5px;
+  box-shadow: 2px 2px 4px #000000;
+  top: 20px;
+  width: 120px;
+  height: 45px;
+}
+
+.fas {
+  margin-right: 10px;
+}
+.bi-cart4 {
+  margin-right: 10px;
+}
+
+/* #inputSearch {
+  box-shadow: 2px 2px 4px #000000;
+  position: absolute;
+  z-index: 900;
+  top: 18px;
+  border-radius: 30px;
+  width: 90%;
+  height: 45px;
+} */
+#inputSearch {
+  box-shadow: 2px 2px 4px #3a3838;
+  position: absolute;
+  z-index: 900;
+  top: 18px;
+  border-radius: 10px;
+  width: 95%;
+  height: 45px;
+}
+
+#BoxinputS {
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  border: none;
+}
+.ms-n5 {
+  border-radius: 10px;
+}
+
+.input-group {
+  background: white;
+}
+
+#box-search {
+  background: none;
+  border-radius: 30px;
+  width: 45px;
+  height: 45px;
+  border-color: none;
+}
+
+.btn-secondary1 {
+  position: absolute;
+  z-index: 900;
+  top: 16px;
+  /* left: 28px; */
+  box-shadow: 2px 2px 4px #000000;
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+  background: white;
+  right: 16px;
+  padding: 4px;
+}
+.ms-n5 {
+  margin-left: -40px;
 }

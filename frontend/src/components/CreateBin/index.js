@@ -242,6 +242,33 @@ const CreateBin = props => {
                     onChange={onInputChange}
                     required/>
             </div>
+
+            <div className="form-row">
+                <div className="form-group col-md-6">
+                    <label>Affiliation</label>
+                    <input 
+                        type="type" 
+                        className="form-control"
+                        name="type"
+                        value={bin.type}
+                        onChange={onInputChange}
+                        required/>
+                </div>
+                <div className="form-group col-md-6">
+                    <label>Type</label>
+                    <select 
+                        className="form-control" 
+                        onChange={(event) => {setBin({ ...bin, tag: event.target.value })}}
+                        required
+                        value={bin.tag}>
+                        <option value="" disabled hidden>---</option>
+                        {options.map(el => (
+                            <option key={el.id} value={el.id}>&#xF287; {el.name}</option>
+                        ))}
+                    </select>
+                </div>
+            </div>
+
             <div className="form-row">
                 <div className="form-group col-md-6">
                     <label>Date</label>
@@ -265,6 +292,7 @@ const CreateBin = props => {
                         required/>
                 </div>
             </div>
+<<<<<<< HEAD
             <div className="form-row">
                 <div className="form-group col-md-6">
                     <label>Type</label>
@@ -305,6 +333,9 @@ const CreateBin = props => {
                     </select>
                 </div>
             </div>
+=======
+            
+>>>>>>> 11c06840f3546957c9d22bd08e41ad3d898f34f5
             <div className="form-group">
                 <label>Description</label>
                 <input 

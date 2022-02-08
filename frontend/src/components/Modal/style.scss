@@ -10,6 +10,11 @@
   z-index: 999;
 }
 
-.modal-backdrop{
+.modal-backdrop {
   background-color: rgba(53, 53, 53, 0.75);
+}
+
+.modal-content {
+  margin-top: 60px;
+  border-radius: 23px;
 }
