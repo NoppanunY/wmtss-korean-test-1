@@ -1,14 +1,12 @@
 .button {
   /* position: absolute; */
 }
-<<<<<<< HEAD
 
 .image-field{
   margin-right: 2%;
   margin-bottom: 20px;
   width: 18%;
 }
-=======
 .btn-light {
   box-shadow: 2px 2px 4px #000000;
 }
@@ -23,4 +21,3 @@
 .btn-danger {
   box-shadow: 2px 2px 4px #000000;
 }
->>>>>>> 11c06840f3546957c9d22bd08e41ad3d898f34f5
