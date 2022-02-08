@@ -1,11 +1,8 @@
-.button {
-  /* position: absolute; */
-}
-
-.image-field{
+.image-field {
   margin-right: 2%;
   margin-bottom: 20px;
   width: 18%;
+  border-radius: 60px;
 }
 .btn-light {
   box-shadow: 2px 2px 4px #000000;
