@@ -292,7 +292,6 @@ const CreateBin = props => {
                         required/>
                 </div>
             </div>
-<<<<<<< HEAD
             <div className="form-row">
                 <div className="form-group col-md-6">
                     <label>Type</label>
@@ -333,9 +332,7 @@ const CreateBin = props => {
                     </select>
                 </div>
             </div>
-=======
             
->>>>>>> 11c06840f3546957c9d22bd08e41ad3d898f34f5
             <div className="form-group">
                 <label>Description</label>
                 <input 
