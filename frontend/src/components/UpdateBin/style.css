@@ -1,3 +1,18 @@
 .button {
-    right: 0;
+  right: 0;
+}
+
+.btn-light {
+  box-shadow: 2px 2px 4px #000000;
+}
+
+.btn-secondary {
+  box-shadow: 2px 2px 4px #000000;
+}
+
+.btn-success {
+  box-shadow: 2px 2px 4px #000000;
+}
+.btn-danger {
+  box-shadow: 2px 2px 4px #000000;
 }
