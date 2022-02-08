@@ -1,3 +1,9 @@
 .button {
   /* position: absolute; */
 }
+
+.image-field{
+  margin-right: 2%;
+  margin-bottom: 20px;
+  width: 18%;
+}

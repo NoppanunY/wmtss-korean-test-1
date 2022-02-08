@@ -201,18 +201,18 @@ const UpdateBin = props => {
                     name="description"
                     value={bin.description}
                     onChange={onInputChange}/>
-                </div>
+            </div>
             
             <div className="button">
-                <div class="form-group row">
-                    <div class="col-md-9"></div>
-                    <div class="col-md-1">
+                <div className="form-group row">
+                    <div className="col-md-9"></div>
+                    <div className="col-md-1">
                     <button type="button" className="btn btn-light" onClick={cancel}>Cancel</button>
                     </div>
-                    <div class="col-md-1">
+                    <div className="col-md-1">
                     <button type="button" className="btn btn-danger" onClick={remove}>Delete</button>
                     </div>
-                    <div class="col-md-1">
+                    <div className="col-md-1">
                     <button type="button" className="btn btn-success" onClick={update}>Save</button>
                     </div>
                 </div>
