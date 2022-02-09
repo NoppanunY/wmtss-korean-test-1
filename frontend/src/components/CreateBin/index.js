@@ -332,19 +332,10 @@ const CreateBin = props => {
                     ))}
                 </div>     
             </div>
-            <div className="button">
-                <div className="form-group row">
-                    <div className="col-md-9"></div>
-                    <div className="col-md-1">
-                        <button type="button" className="btn btn-light" onClick={cancel}>Cancel</button>
-                    </div>
-                    <div className="col-md-1">
-                        <button type="button" className="btn btn-secondary" onClick={clear}>Clear</button>
-                    </div>
-                    <div className="col-md-1">
-                        <button type="button" className="btn btn-success" onClick={create}>Save</button>
-                    </div>
-                </div>
+            <div className="modal-footer">
+                <button type="button" className="btn btn-light" onClick={cancel}>Cancel</button>
+                <button type="button" className="btn btn-danger" onClick={clear}>Delete</button>
+                <button type="button" className="btn btn-success" onClick={buildFileSelector}>Save</button>
             </div>
         </form>
     )
