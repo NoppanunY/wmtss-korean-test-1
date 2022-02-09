@@ -31,7 +31,7 @@
   padding: 11px;
   border: 1px solid #ddd;
   padding-left: 10px;
-  margin-left: 0px;
+  margin: 10px 10px 10px 10px;
 }
 #myMenu {
   list-style-type: none;
