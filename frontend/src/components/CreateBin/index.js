@@ -181,12 +181,6 @@ const CreateBin = props => {
         props.setActiveModal({active: false });
     }
 
-    function buildFileSelector(){
-        const fileSelector = document.createElement('input');
-        fileSelector.setAttribute('type', 'file');
-        return fileSelector;
-    }
-
     const selectImage = (e, seq) => {
         // access to e.target here
         // e.preventDefault();

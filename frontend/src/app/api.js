@@ -61,6 +61,16 @@ function getCreateImage(image){
     return response;
 }
 
+function getImageBin(id){
+    const response = axios.get('api/image', {
+        params:{
+            bin: id
+        }
+    });
+
+    return response;
+}
+
 export { 
     getTags, 
 
@@ -71,4 +81,5 @@ export {
     getDeleteBin,
 
     getCreateImage,
+    getImageBin,
 };
