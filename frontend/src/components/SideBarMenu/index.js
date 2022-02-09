@@ -5,7 +5,7 @@ const SideBar = props => {
     const {criteria, hideSidebar, deleteBin, setModal} = props;
 
     return (
-        <nav className="sidebar-wrapper">
+        <nav className="sidebar-wrapper" id="sideBarMenu">
             <div className="sidebar-header">
                 <div class="left">
                     <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category" />

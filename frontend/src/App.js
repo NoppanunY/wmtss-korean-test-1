@@ -138,11 +138,19 @@ export default function App() {
     <div className="app">
       <NavbarTop/>
 
-        <SideBarMenu 
+        {/* <SideBarMenu 
           criteria={criteria}
           hideSidebar={() => {setActiveSidebar(false)}}
           setModal={setModal}
-        ></SideBarMenu>
+        ></SideBarMenu> */}
+
+        { activeSidebar &&(
+          <SideBar 
+          criteria={criteria}
+          hideSidebar={() => {setActiveSidebar(false)}}
+          setModal={setModal}
+        ></SideBar>
+        )}
 
       <MapContainer center={[13.2848334, 100.9179506]} zoom={14} scrollWheelZoom={true} zoomControl={false}>
         <TileLayer
