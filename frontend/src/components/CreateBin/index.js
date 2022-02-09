@@ -181,12 +181,6 @@ const CreateBin = props => {
         props.setActiveModal({active: false });
     }
 
-    function buildFileSelector(){
-        const fileSelector = document.createElement('input');
-        fileSelector.setAttribute('type', 'file');
-        return fileSelector;
-    }
-
     const selectImage = (e, seq) => {
         // access to e.target here
         // e.preventDefault();
@@ -335,7 +329,7 @@ const CreateBin = props => {
             <div className="modal-footer">
                 <button type="button" className="btn btn-light" onClick={cancel}>Cancel</button>
                 <button type="button" className="btn btn-danger" onClick={clear}>Delete</button>
-                <button type="button" className="btn btn-success" onClick={buildFileSelector}>Save</button>
+                <button type="button" className="btn btn-success" onClick={create}>Save</button>
             </div>
         </form>
     )

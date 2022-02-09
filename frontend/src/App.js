@@ -95,7 +95,7 @@ export default function App() {
   }
 
   // Delete Bin from API
-  const updateBin = async (id, updateBin) => {
+  const updateBin = async (id, updateBi) => {
     setLoading(true);
     console.log(id);
     try {

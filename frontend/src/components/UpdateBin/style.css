@@ -1,5 +1,8 @@
-.button {
-  right: 0;
+.image-field {
+  margin-right: 2%;
+  margin-bottom: 20px;
+  width: 18%;
+  border-radius: 60px;
 }
 
 .btn-light {

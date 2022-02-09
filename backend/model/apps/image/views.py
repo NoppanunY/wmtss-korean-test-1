@@ -12,7 +12,10 @@ class ImageView(viewsets.ModelViewSet):
     queryset = Image.objects.all()  
     # model = Image
     serializer_class = ImageSerializer
-    # parser_classes = (MultiPartParser, JSONParser)
+    
+    def get_queryset(self):
+        queryset = Image.objects.filter(bin=self.request.GET.get('bin'))
+        return queryset
     
     # file = 'R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
     # serializer = ImageSerializer(data={'bin_id': 1, 'file': file})
