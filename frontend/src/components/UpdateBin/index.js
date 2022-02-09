@@ -283,6 +283,7 @@ const UpdateBin = props => {
                     value={bin.description}
                     onChange={onInputChange}/>
             </div>
+<<<<<<< HEAD
             <div className="form-row">
                 <div className="from-group">
                     {Object.keys(selectedImage).map((key, i) => (
@@ -310,6 +311,13 @@ const UpdateBin = props => {
                     <button type="button" className="btn btn-success" onClick={update}>Save</button>
                     </div>
                 </div>
+=======
+            
+            <div className="modal-footer">
+                <button type="button" className="btn btn-light" onClick={cancel}>Cancel</button>
+                <button type="button" className="btn btn-danger" onClick={remove}>Delete</button>
+                <button type="button" className="btn btn-success" onClick={update}>Save</button>
+>>>>>>> 43f607df125bf94d78c56f4ce36e7272026cea6c
             </div>
         </form>
     )
