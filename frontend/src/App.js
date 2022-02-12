@@ -32,6 +32,7 @@ export default function App() {
   const [activeSidebar, setActiveSidebar] = useState({name: "", type: "", active: false});
   const [activeModal, setActiveModal] = useState({ name: "", type: "", active: false });
 
+  const [filter, setFilter] = useState(null);
   // Setting up Modal
   const setModal = modal => {
     setActiveModal({ name: modal.name, type: modal.type, active: true });
@@ -150,7 +151,15 @@ export default function App() {
     }
   }
 
-  useEffect(() => {
+  const filterBin = (type) => {
+    if(filter === type){
+      setFilter(null);
+    }else{
+      setFilter(type);
+    }
+  }
+
+  useEffect(() =>{
     fetchBins();
   }, []);
 
@@ -187,7 +196,7 @@ export default function App() {
         {loading ? (
           null
         ) : (
-          bins.filter(bin => (bin.tag === 2 || !null)).map(bin => (
+          bins.filter(bin => (bin.tag === filter || !filter)).map(bin => (
               <Marker key={bin.id} position={[bin.lat, bin.lng]} 
                 eventHandlers={{
                   click: (e) => {
@@ -227,25 +236,25 @@ export default function App() {
         </svg>
       </Button>
 
-      <Button type="button" id="btnBin1">
+      <Button type="button" id="btnBin1" className={(filter === 1 ? "filter-active" : "")} onClick={() => {filterBin(1)}}>
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="green" className="bi bi-trash3-fill" viewBox="0 0 16 16">
           <path fillRule="evenodd" d="M6 1.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v1H6v-1Zm5 0v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5ZM4.5 5.029a.5.5 0 1 1 .998-.06l.5 8.5a.5.5 0 0 1-.998.06l-.5-8.5Zm6.53-.528a.5.5 0 0 1 .47.528l-.5 8.5a.5.5 0 1 1-.998-.058l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
         </svg>
       </Button>
 
-      <Button type="button" id="btnBin2">
+      <Button type="button" id="btnBin2" className={(filter === 2 ? "filter-active" : "")} onClick={() => {filterBin(2)}}>
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="yellow" className="bi bi-trash3-fill" viewBox="0 0 16 16">
           <path fillRule="evenodd" d="M6 1.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v1H6v-1Zm5 0v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5ZM4.5 5.029a.5.5 0 1 1 .998-.06l.5 8.5a.5.5 0 0 1-.998.06l-.5-8.5Zm6.53-.528a.5.5 0 0 1 .47.528l-.5 8.5a.5.5 0 1 1-.998-.058l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
         </svg>
       </Button>
       
-      <Button type="button" id="btnBin3">
+      <Button type="button" id="btnBin3" className={(filter === 3 ? "filter-active" : "")} onClick={() => {filterBin(3)}}>
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="blue" className="bi bi-trash3-fill" viewBox="0 0 16 16">
           <path fillRule="evenodd" d="M6 1.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v1H6v-1Zm5 0v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5ZM4.5 5.029a.5.5 0 1 1 .998-.06l.5 8.5a.5.5 0 0 1-.998.06l-.5-8.5Zm6.53-.528a.5.5 0 0 1 .47.528l-.5 8.5a.5.5 0 1 1-.998-.058l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
         </svg>
       </Button>
 
-      <Button type="button" id="btnBin4">
+      <Button type="button" id="btnBin4" className={(filter === 4 ? "filter-active" : "")} onClick={() => {filterBin(4)}}>
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="red" className="bi bi-trash3-fill" viewBox="0 0 16 16">
           <path fillRule="evenodd" d="M6 1.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v1H6v-1Zm5 0v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5ZM4.5 5.029a.5.5 0 1 1 .998-.06l.5 8.5a.5.5 0 0 1-.998.06l-.5-8.5Zm6.53-.528a.5.5 0 0 1 .47.528l-.5 8.5a.5.5 0 1 1-.998-.058l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
         </svg>

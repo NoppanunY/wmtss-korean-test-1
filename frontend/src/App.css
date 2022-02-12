@@ -87,3 +87,7 @@
   background: white;
   box-shadow: 2px 2px 4px #000000;
 }
+
+.filter-active{
+  filter: brightness(0.85);
+}
