@@ -28,11 +28,11 @@ const UpdateBin = props => {
     };
 
     const initialImage = {
-        "1": null,
-        "2": null,
-        "3": null,
-        "4": null,
-        "5": null,
+        "1": {bin: null, image: null},
+        "2": {bin: null, image: null},
+        "3": {bin: null, image: null},
+        "4": {bin: null, image: null},
+        "5": {bin: null, image: null},
     }
 
     const [bin, setBin] = useState(initialData); 
@@ -71,27 +71,32 @@ const UpdateBin = props => {
         try {
             await getImageBin(props.criteria.id)
             .then((res) => {
-                console.log("RES", res.data[0]);
-                // res.data.forEach((element, index) => {
-                //     let i = (index+1).toString();
-                   
-                //     setSelectedImage({...selectedImage, "2": element.image});
-                // });
-
+                const contentType = 'image/png';
                 setSelectedImage({
-                    "1" : `data:image/png;base64,${res.data[0].image}`,
-                    "2" : `data:image/png;base64,${res.data[1].image}`,
-                    "3" : `data:image/png;base64,${res.data[2].image}`,
-                    "4" : `data:image/png;base64,${res.data[3].image}`,
-                    "5" : `data:image/png;base64,${res.data[4].image}`,
+                    "1" : {
+                        id: res.data[0] ? res.data[0].id : null,
+                        image: res.data[0] ? URL.createObjectURL(b64toBlob(res.data[0].image, contentType)) : null
+                    },
+                    "2" : {
+                        id: res.data[1] ? res.data[1].id : null,
+                        image: res.data[1] ? URL.createObjectURL(b64toBlob(res.data[1].image, contentType)) : null
+                    },
+                    "3" : {
+                        id: res.data[2] ? res.data[2].id : null,
+                        image: res.data[2] ? URL.createObjectURL(b64toBlob(res.data[2].image, contentType)) : null
+                    },
+                    "4" : {
+                        id: res.data[3] ? res.data[3].id : null,
+                        image: res.data[3] ? URL.createObjectURL(b64toBlob(res.data[3].image, contentType)) : null
+                    },
+                    "5" : {
+                        id: res.data[4] ? res.data[4].id : null,
+                        image: res.data[4] ? URL.createObjectURL(b64toBlob(res.data[4].image, contentType)) : null
+                    },
                 });
-
-                console.log("THEN", selectedImage);
             })
         } catch (err) {
             console.log(err);
-        } finally {
-            console.log("FINALLY", selectedImage);
         }
     }
 
@@ -114,6 +119,7 @@ const UpdateBin = props => {
     useEffect(() => {
         fetchBinDetail();
         fetchBinImage();
+        
         fetchTags();        
     }, [])
 
@@ -124,15 +130,15 @@ const UpdateBin = props => {
 
     const update = event => {
         // let isValid = true;
-        console.log(selectedImage);
-        let imageBase64 = [];
+        console.log("selectedImage",selectedImage);
+        let imageBase64 = [];   
         for(const [key, value] of Object.entries(selectedImage)){
-            if(value == null){
+            if(value.image == null){
                 break;
             }
             axios({
                 method: "GET",
-                url: value,
+                url: value.image,
                 responseType: "blob"
             }).then(function(response){
                 var reader = new FileReader();
@@ -140,7 +146,7 @@ const UpdateBin = props => {
                 reader.onloadend = function () {
                     var base64data = reader.result;
                     base64data = base64data.substring(22);
-                    imageBase64.push({"bin": null, "image": base64data});
+                    imageBase64.push({"bin": value.id, "image": base64data});
                     // imageBase64['' + key] = base64data;
                 }
             })
@@ -189,6 +195,26 @@ const UpdateBin = props => {
         // fileSelector.click();
     }
 
+    const b64toBlob = (b64Data, contentType='', sliceSize=512) => {
+        const byteCharacters = atob(b64Data);
+        const byteArrays = [];
+        
+        for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            const slice = byteCharacters.slice(offset, offset + sliceSize);
+        
+            const byteNumbers = new Array(slice.length);
+            for (let i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+            }
+        
+            const byteArray = new Uint8Array(byteNumbers);
+            byteArrays.push(byteArray);
+        }
+        
+        const blob = new Blob(byteArrays, {type: contentType});
+        return blob;
+    }
+      
     return (
         <form className={isSubmit}>
             <div className="form-row">
@@ -288,9 +314,9 @@ const UpdateBin = props => {
                     {Object.keys(selectedImage).map((key, i) => (
                         <div key={key}>
                             <label htmlFor={"upload-button-" + key} style={{display: "inline"}}>
-                                <img src={![key] ? placeholder : selectedImage[key]} 
+                                <img src={!selectedImage[key].image ? placeholder : selectedImage[key].image} 
                                     className="image-field float-left" 
-                                    alt={selectedImage[key] }/>                                
+                                    alt="..."/>                                
                             </label>
                             <input type="file" id={"upload-button-" + key} style={{display: "none"}} onChange={((e) => selectImage(e, key))}/>
                         </div>

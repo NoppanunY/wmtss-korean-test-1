@@ -121,34 +121,6 @@ const CreateBin = props => {
                 }
             })
         }
-        // axios({
-        //     methos: "get",
-        //     url: selectedImage["1"],
-        //     responseType: "blob"
-        // }).then(function(response){
-        //     var reader = new FileReader();
-        //     reader.readAsDataURL(response.data);
-        //     reader.onloadend = function () {
-        //         var base64data = reader.result;
-        //         base64data = base64data.substring(22);
-        //         axios({
-        //             method: "POST",
-        //             url: "api/image/",
-        //             data: [{
-        //                     "image": base64data,
-        //                     "bin": 1
-        //                 },
-        //                 {
-        //                     "image": base64data,
-        //                     "bin": 1
-        //                 }]
-        //         }).then((res) => {
-        //             console.log("Complete");
-        //         }).catch((err) => {
-        //             console.log(err);
-        //         })
-        //     };
-        // });
 
         // console.log(bin);
         event.preventDefault();
@@ -183,22 +155,13 @@ const CreateBin = props => {
 
     const selectImage = (e, seq) => {
         // access to e.target here
-        // e.preventDefault();
+        e.preventDefault();
         console.log(seq);
         if(e.target.files.length > 0){
             setSelectedImage({ ...selectedImage, [seq]: URL.createObjectURL(e.target.files[0])})
         }
         console.log(selectedImage);
-        // console.log(file.files);
-        // setSelectedImage({...selectedImage, })
-        // var fileSelector = buildFileSelector();
-        // fileSelector.click();
     }
-
-    // const seleteImage = (e: React.ChangeEvent<HTMLInputElement>, data): void => {
-    //     const files = Array.from(e.target.files)
-    //     console.log("files:", files)
-    //   }
 
     return (
         <form className={isSubmit}>

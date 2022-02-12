@@ -61,6 +61,14 @@ function getCreateImage(image){
     return response;
 }
 
+function getUpdateImage(image){
+    const response = axios.patch('api/image/', {
+        "image": image
+    });
+
+    return response;
+}
+
 function getImageBin(id){
     const response = axios.get('api/image', {
         params:{
@@ -81,5 +89,6 @@ export {
     getDeleteBin,
 
     getCreateImage,
+    getUpdateImage,
     getImageBin,
 };

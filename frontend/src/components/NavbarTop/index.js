@@ -52,17 +52,17 @@ const NavbarTop = props => {
                 </div>  */}
                 
 
-            <div class="topnav">
-                <a className="btn-secondary1">
+            <div className="topnav">
+                <a className="btn-secondary1" onClick={() => {props.showSidebar({type: "MENU", active: true});}}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" className="bi bi-list" viewBox="0 0 16 16">
                         <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
                     </svg>
                 </a>
                 <a>
-                    <div class="search-container">
+                    <div className="search-container">
                         <form action="/action_page.php">
                         <input type="text" placeholder="Search.." name="search"/>
-                        <button type="submit"><i class="fa fa-fw fa-search"></i></button>
+                        <button type="submit"><i className="fa fa-fw fa-search"></i></button>
                         </form>
                     </div>
                 </a>
