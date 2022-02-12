@@ -172,7 +172,8 @@ export default function App() {
             { activeSidebar.type === "MENU" && (
               <SideBarMenu 
                 criteria={criteria}
-                hideSidebar={() => {setActiveSidebar(false)}}>
+                hideSidebar={() => {setActiveSidebar(false)}}
+                setModal={setModal}>
               </SideBarMenu>
             )}
           </>
