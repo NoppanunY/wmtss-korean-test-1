@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react'
 
 import {
     getTags,
-    getBinDetail
+    getBinDetail,
+    
+    getImageBin
 } from '../../app/api';
 
 import placeholder from '../../assets/img/placeholder.png';
@@ -11,7 +13,16 @@ import "./style.css";
 const SideBar = props => {
     const {criteria, hideSidebar, deleteBin, setModal} = props;
 
-    const [binDetial, setBinDetail] = useState({});
+    const initialImage = {
+        "1": {bin: null, image: null},
+        "2": {bin: null, image: null},
+        "3": {bin: null, image: null},
+        "4": {bin: null, image: null},
+        "5": {bin: null, image: null},
+    }
+
+    const [binDetail, setBinDetail] = useState({});
+    const [imageDetail, setImageDetail] = useState(initialImage);
 
     const [options, setOptions] = useState([]);
 
@@ -37,22 +48,79 @@ const SideBar = props => {
         }
     }
 
-    
+    const fetchBinImage = async () => {
+        try {
+            await getImageBin(criteria.id)
+            .then((res) => {
+                const contentType = 'image/png';
+                setImageDetail({
+                    "1" : {
+                        id: res.data[0] ? res.data[0].id : null,
+                        image: res.data[0] ? URL.createObjectURL(b64toBlob(res.data[0].image, contentType)) : null,
+                        seq: 1
+                    },
+                    "2" : {
+                        id: res.data[1] ? res.data[1].id : null,
+                        image: res.data[1] ? URL.createObjectURL(b64toBlob(res.data[1].image, contentType)) : null,
+                        seq: 2
+                    },
+                    "3" : {
+                        id: res.data[2] ? res.data[2].id : null,
+                        image: res.data[2] ? URL.createObjectURL(b64toBlob(res.data[2].image, contentType)) : null,
+                        seq: 3
+                    },
+                    "4" : {
+                        id: res.data[3] ? res.data[3].id : null,
+                        image: res.data[3] ? URL.createObjectURL(b64toBlob(res.data[3].image, contentType)) : null,
+                        seq: 4
+                    },
+                    "5" : {
+                        id: res.data[4] ? res.data[4].id : null,
+                        image: res.data[4] ? URL.createObjectURL(b64toBlob(res.data[4].image, contentType)) : null,
+                        seq: 5
+                    },
+                });
+            })
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     const edit = event => {
         setModal({name: "Update bin", type: "UPDATE_BIN"})
         hideSidebar();
     }
     
+    const b64toBlob = (b64Data, contentType='', sliceSize=512) => {
+        const byteCharacters = atob(b64Data);
+        const byteArrays = [];
+        
+        for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            const slice = byteCharacters.slice(offset, offset + sliceSize);
+        
+            const byteNumbers = new Array(slice.length);
+            for (let i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+            }
+        
+            const byteArray = new Uint8Array(byteNumbers);
+            byteArrays.push(byteArray);
+        }
+        
+        const blob = new Blob(byteArrays, {type: contentType});
+        return blob;
+    }
+
     useEffect(() => {
         fetchTags();
         fetchBinDetail();
+        fetchBinImage();
     }, [criteria.id]);
 
     return (
         <nav className="sidebar-wrapper">
             <div className="sidebar-header">
-                <img className="image-header img-fluid" src={placeholder} alt="Responsive"/>
+                <img className="image-header img-fluid" src={!imageDetail["1"].image ? placeholder : imageDetail["1"].image} alt="Responsive"/>
                 <button type="button" id="btnClose" onClick={hideSidebar}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" className="bi bi-x-circle-fill" viewBox="0 0 16 16">
                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
@@ -71,35 +139,35 @@ const SideBar = props => {
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label col-form-label-sm">Latitude</label>
                         <div className="col-sm-10">
-                            <div className="form-control-sm">{binDetial.lat}</div>
+                            <div className="form-control-sm">{binDetail.lat}</div>
                         </div>
                     </div>
                     
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label col-form-label-sm">Longitude</label>
                         <div className="col-sm-10">
-                            <div className="form-control-sm">{binDetial.lng}</div>
+                            <div className="form-control-sm">{binDetail.lng}</div>
                         </div>
                     </div>
 
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label col-form-label-sm">Location</label>
                         <div className="col-sm-10">
-                            <div className="form-control-sm">{binDetial.location}</div>
+                            <div className="form-control-sm">{binDetail.location}</div>
                         </div>
                     </div>
 
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label col-form-label-sm">Type</label>
                         <div className="col-sm-10">
-                            <div className="form-control-sm">{binDetial.type}</div>
+                            <div className="form-control-sm">{binDetail.type}</div>
                         </div>
                     </div>
 
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label col-form-label-sm">Tag</label>
                         <div className="col-sm-10">
-                            <div className="form-control-sm">{options.filter(option => option.id === binDetial.tag).map(filterOption => (
+                            <div className="form-control-sm">{options.filter(option => option.id === binDetail.tag).map(filterOption => (
                                 filterOption.name
                             ))}</div>
                         </div>
@@ -108,15 +176,27 @@ const SideBar = props => {
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label col-form-label-sm">Date</label>
                         <div className="col-sm-10">
-                            <div className="form-control-sm">{binDetial.time} &nbsp; {binDetial.date}</div>
+                            <div className="form-control-sm">{binDetail.time} &nbsp; {binDetail.date}</div>
                         </div>
                     </div>
 
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label col-form-label-sm">Description</label>
                         <div className="col-sm-10">
-                            <div className="form-control-sm">{binDetial.description}</div>
+                            <div className="form-control-sm">{binDetail.description}</div>
                         </div>
+                    </div>
+
+                    <div className="form-group row image-display">
+                        { Object.keys(imageDetail).filter(key => imageDetail[key].seq > 1).map((key, i) => (
+                            <div key={key}>
+                                <label htmlFor={"upload-button-" + key} style={{display: "inline"}}>
+                                    <img src={!imageDetail[key].image ? placeholder : imageDetail[key].image} 
+                                        className="image-field float-left" 
+                                        alt="..."/>                                
+                                </label>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
