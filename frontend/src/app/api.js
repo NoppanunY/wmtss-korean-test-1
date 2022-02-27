@@ -1,24 +1,54 @@
 import axios from 'axios';
+import client from '../services/utils/axiosInstance';
+
+// Default config options
+// const defaultOptions = {
+//     headers: {
+//         'Content-Type': 'application/json',
+//     },
+// };
+
+// Create instance
+// let client = axios.create(defaultOptions);
+
+// Set the AUTH token for any request
+// client.interceptors.request.use(function (config) {
+//     const token = JSON.parse(localStorage.getItem('authTokens'));
+//     config.headers.Authorization =  token ? `Bearer ${token.access}` : '';
+//     return config;
+// });
+
+// client.interceptors.response.use((response) => {
+//     console.log("interceptors response", response);
+//     return response;
+// });
 
 // Common
+function getUser(token){
+    const response = client.post("api/auth/token/verify/", {
+        "token": token
+    });
+    return response;
+}
+
 function getTags(){
-    const response = axios.get('api/tag');
+    const response = client.get('api/tag');
     return response;
 }
 
 // Bin
 function getBins(){
-    const response = axios.get('api/bin');
+    const response = client.get('api/bin');
     return response;
 }
 
 function getBinDetail(id){
-    const response = axios.get(`api/bin/${id}`);
+    const response = client.get(`api/bin/${id}`);
     return response;
 }
 
 function getCreateBin({ lat, lng, location, type, date, time, description, tag }){
-    const response = axios.post('api/bin/', {
+    const response = client.post('api/bin/', {
         "lat": lat,
         "lng": lng,
         "location": location,
@@ -33,7 +63,7 @@ function getCreateBin({ lat, lng, location, type, date, time, description, tag }
 }
 
 function getUpdatedBin(id, bin) {
-    const response = axios.put(`api/bin/${id}/`, {
+    const response = client.put(`api/bin/${id}/`, {
         "lat": bin.lat,
         "lng": bin.lng,
         "location": bin.location,
@@ -48,13 +78,13 @@ function getUpdatedBin(id, bin) {
   }
 
 function getDeleteBin(id){
-    const response = axios.delete(`api/bin/${id}`);
+    const response = client.delete(`api/bin/${id}`);
     return response;
 }
 
 // Image
 function getCreateImage(image){
-    const response = axios.post('api/image/', {
+    const response = client.post('api/image/', {
         "image": image
     });
 
@@ -62,15 +92,16 @@ function getCreateImage(image){
 }
 
 function getUpdateImage(image){
-    const response = axios.patch('api/image/', {
-        "image": image
+    console.log("Update image", image);
+    const response = client.patch(`api/image/${image["id"]}/`, {
+        "image": image.image
     });
 
     return response;
 }
 
 function getImageBin(id){
-    const response = axios.get('api/image', {
+    const response = client.get('api/image', {
         params:{
             bin: id
         }
@@ -80,6 +111,7 @@ function getImageBin(id){
 }
 
 export { 
+    getUser,
     getTags, 
 
     getBins,

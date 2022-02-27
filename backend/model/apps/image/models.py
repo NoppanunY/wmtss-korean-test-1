@@ -8,7 +8,7 @@ class Image(models.Model):
     # image = models.BinaryField(blank=True, null=True)
     image = models.TextField(blank=True)
 
-    bin = models.ForeignKey(Bin, on_delete=models.DO_NOTHING, related_name='bin_id')
+    bin = models.ForeignKey(Bin, on_delete=models.CASCADE, related_name='bin_id')
 
     def set_data(self, data):
         self.image = base64.encodestring(data)

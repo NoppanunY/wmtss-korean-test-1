@@ -5,11 +5,17 @@ import "react-datepicker/dist/react-datepicker.css";
 import './index.css';
 import App from './App';
 
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from 'react-redux';
-import rootReducer from './components/store/reducers/rootReducer';
+import rootReducer from './services/reducers';
+import thunk from "redux-thunk";
 
-const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const middlewares = [thunk];
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(...middlewares))
+);
 
 ReactDOM.render(
   <React.StrictMode>

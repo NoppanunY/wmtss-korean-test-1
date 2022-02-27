@@ -11,7 +11,7 @@ import placeholder from '../../assets/img/placeholder.png';
 import "./style.css";
 
 const SideBar = props => {
-    const {criteria, hideSidebar, deleteBin, setModal} = props;
+    const {criteria, hideSidebar, setModal} = props;
 
     const initialImage = {
         "1": {bin: null, image: null},

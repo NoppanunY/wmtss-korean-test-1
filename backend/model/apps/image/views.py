@@ -1,20 +1,31 @@
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework import status
 from django.shortcuts import render
-from .serializers import ImageSerializer
-from .models import Image
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.parsers import JSONParser, MultiPartParser
 import base64, binascii
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 
+from .serializers import ImageSerializer
+from .models import Image
+
+# @permission_classes([IsAuthenticated])
+# class ImageView(viewsets.ModelViewSet):
 class ImageView(viewsets.ModelViewSet):
     queryset = Image.objects.all()  
     # model = Image
     serializer_class = ImageSerializer
     
     def get_queryset(self):
-        queryset = Image.objects.filter(bin=self.request.GET.get('bin'))
+        if self.request.GET.get('bin') != None:
+            queryset = Image.objects.filter(bin=self.request.GET.get('bin'))
+        else:
+            queryset = Image.objects.all()
+        # serializer = ImageSerializer(images, many=True)
+        # return Response({"data": serializer.data})
         return queryset
     
     # file = 'R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
@@ -24,6 +35,7 @@ class ImageView(viewsets.ModelViewSet):
     #     print("post")
     # # def create(self, request):
     # #     print("create!")
+
     def create(self, request, *args, **kwargs):
         # request.data._mutable = True
 
@@ -62,5 +74,34 @@ class ImageView(viewsets.ModelViewSet):
             headers = self.get_success_headers(serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
-    def update(self, request, pk=None):
-        print("Update")
+    # def get_object(self, obj_id):
+    #     try:
+    #         return Image.objects.get(id=obj_id)
+    #     except (Image.DoesNotExist):
+    #         raise status.HTTP_400_BAD_REQUEST
+
+    # def validate_ids(self, id_list):
+    #     for id in id_list:
+    #         try:
+    #             Image.objects.get(id=id)
+    #         except (Image.DoesNotExist):
+    #             raise status.HTTP_400_BAD_REQUEST
+    #     return True
+
+    # def update(self, request, pk=None):
+        # print(request.data)
+    # def update(self, request, pk=None):
+    #     data = request.data
+    #     ticket_ids = [i['ticket_id'] for i in data]
+    #     self.validate_ids(ticket_ids)
+    #     instances = []
+    #     for temp_dict in data:
+    #         bin_id = temp_dict['bin']
+    #         image = temp_dict['image']
+    #         # description = temp_dict['description']
+
+    #         obj = self.get_object(bin_id)
+    #         obj.image = image
+    #         # obj.description = description
+    #         obj.save()
+    #         instances.append(obj)

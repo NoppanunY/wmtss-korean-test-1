@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux';
 import DatePicker, { registerLocale} from "react-datepicker";
 import Moment from 'moment';
 import ptBR from 'date-fns/locale/pt-BR';
 import axios from 'axios';
+
+import {
+    updateBin,
+    deleteBin,
+} from '../../services/actions/binAction';
 
 import {
     getTags,
@@ -28,12 +34,13 @@ const UpdateBin = props => {
     };
 
     const initialImage = {
-        "1": {bin: null, image: null},
-        "2": {bin: null, image: null},
-        "3": {bin: null, image: null},
-        "4": {bin: null, image: null},
-        "5": {bin: null, image: null},
+        "1": {id: null, image: null},
+        "2": {id: null, image: null},
+        "3": {id: null, image: null},
+        "4": {id: null, image: null},
+        "5": {id: null, image: null},
     }
+    const dispatch = useDispatch();
 
     const [bin, setBin] = useState(initialData); 
     const [selectedImage, setSelectedImage] = useState(initialImage);
@@ -112,7 +119,7 @@ const UpdateBin = props => {
     }
 
     const remove = event => {
-        props.deleteBin(bin.id);
+        dispatch(deleteBin(bin.id));
         props.setActiveModal({ active: false });
     }
 
@@ -146,7 +153,7 @@ const UpdateBin = props => {
                 reader.onloadend = function () {
                     var base64data = reader.result;
                     base64data = base64data.substring(22);
-                    imageBase64.push({"bin": value.id, "image": base64data});
+                    imageBase64.push({"id": value.id, "image": base64data});
                     // imageBase64['' + key] = base64data;
                 }
             })
@@ -164,16 +171,12 @@ const UpdateBin = props => {
         // if(typeof(bin["lng"]) !== "undefined") 
             if(String(!bin["lng"]).match(regex.lng)) return
         
-        props.updateBin(bin.id, {...bin, 
+        dispatch(updateBin(bin.id, {...bin, 
             date: Moment(bin.date).format('YYYY-MM-DD'),
             time: Moment(bin.time).format('hh:mm:ss')
-        }, imageBase64);
-        props.setActiveModal({active: false });
-    }
+        }, imageBase64));
 
-    const clear = () => {
-        setBin(initialData);
-        setIsSumnit("needs-validated");
+        props.setActiveModal({active: false });
     }
 
     const cancel = event => {
@@ -183,10 +186,22 @@ const UpdateBin = props => {
 
     const selectImage = (e, seq) => {
         // access to e.target here
-        // e.preventDefault();
+        e.preventDefault();
         console.log(seq);
         if(e.target.files.length > 0){
-            setSelectedImage({ ...selectedImage, [seq]: URL.createObjectURL(e.target.files[0])})
+            if(e.target.files.length > 0){
+                for(const [key, value] of Object.entries(selectedImage)){
+                    if(value.image == null){
+                        setSelectedImage({ ...selectedImage, [key]: {"id": value.id, "image": URL.createObjectURL(e.target.files[0])} })
+                        break;
+                    }
+                    if(seq === key){
+                        setSelectedImage({ ...selectedImage, [seq]: {"id": value.id, "image": URL.createObjectURL(e.target.files[0])} })
+                        break;
+                    }
+                }
+            }
+            // setSelectedImage({ ...selectedImage, [seq]: URL.createObjectURL(e.target.files[0])})
         }
         console.log(selectedImage);
         // console.log(file.files);

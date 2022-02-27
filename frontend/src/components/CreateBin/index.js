@@ -1,12 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react'
-import DatePicker, { registerLocale} from "react-datepicker";
+import React, { useState, useEffect } from 'react'
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import DatePicker, { registerLocale } from "react-datepicker";
 import Moment from 'moment';
 import ptBR from 'date-fns/locale/pt-BR';
-import axios from 'axios';
 
 import {
     getTags
 } from './../../app/api';
+
+import {
+    createBin
+} from '../../services/actions/binAction'
 
 import placeholder from '../../assets/img/placeholder.png';
 import "./style.css";
@@ -16,6 +21,8 @@ import Select from 'react-select';
 registerLocale('pt-BR', ptBR)
 
 const CreateBin = props => {
+    const dispatch = useDispatch();
+
     const initialData = {
         "lat": "",
 		"lng": "",
@@ -28,11 +35,11 @@ const CreateBin = props => {
     };
 
     const initialImage = {
-        "1": null,
-        "2": null,
-        "3": null,
-        "4": null,
-        "5": null,
+        "1": {bin: null, image: null},
+        "2": {bin: null, image: null},
+        "3": {bin: null, image: null},
+        "4": {bin: null, image: null},
+        "5": {bin: null, image: null},
     }
 
     const icon = [
@@ -117,7 +124,6 @@ const CreateBin = props => {
                     var base64data = reader.result;
                     base64data = base64data.substring(22);
                     imageBase64.push({"bin": null, "image": base64data});
-                    // imageBase64['' + key] = base64data;
                 }
             })
         }
@@ -135,10 +141,10 @@ const CreateBin = props => {
         // if(typeof(bin["lng"]) !== "undefined") 
             if(!bin["lng"].match(regex.lng)) return
         
-        props.createBin({...bin, 
+        dispatch(createBin({...bin, 
             date: Moment(bin.date).format('YYYY-MM-DD'),
             time: Moment(bin.time).format('hh:mm:ss')
-        }, imageBase64);
+        }, imageBase64))
 
         props.setActiveModal({active: false });
     }
@@ -158,7 +164,16 @@ const CreateBin = props => {
         e.preventDefault();
         console.log(seq);
         if(e.target.files.length > 0){
-            setSelectedImage({ ...selectedImage, [seq]: URL.createObjectURL(e.target.files[0])})
+            for(const [key, value] of Object.entries(selectedImage)){
+                if(value.image == null){
+                    setSelectedImage({ ...selectedImage, [key]: {"bin": null, "image": URL.createObjectURL(e.target.files[0])} })
+                    break;
+                }
+                if(seq === key){
+                    setSelectedImage({ ...selectedImage, [seq]: {"bin": null, "image": URL.createObjectURL(e.target.files[0])} })
+                    break;
+                }
+            }
         }
         console.log(selectedImage);
     }
@@ -280,7 +295,7 @@ const CreateBin = props => {
                     {Object.keys(selectedImage).map((key, i) => (
                         <div key={key}>
                             <label htmlFor={"upload-button-" + key} style={{display: "inline"}}>
-                                <img src={!selectedImage[key] ? placeholder : selectedImage[key]} 
+                                <img src={!selectedImage[key]["image"] ? placeholder : selectedImage[key]["image"]} 
                                     className="image-field float-left" 
                                     alt={selectedImage[key] }/>                                
                             </label>

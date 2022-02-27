@@ -4,7 +4,10 @@ from django.shortcuts import render
 from .serializers import TagSerializer
 from .models import Tag
 from rest_framework import viewsets
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 
+@permission_classes([IsAuthenticated])
 class TagView(viewsets.ModelViewSet):
     serializer_class = TagSerializer
     queryset = Tag.objects.all()
