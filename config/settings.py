@@ -23,8 +23,8 @@ from datetime import timedelta
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-h$ew38)h+9ga(vp()%ylu87*i%^$_44z^-_&e(g_@1!md0ilc='
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = 'django-insecure-h$ew38)h+9ga(vp()%ylu87*i%^$_44z^-_&e(g_@1!md0ilc='
+# SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -106,6 +106,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' 
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
