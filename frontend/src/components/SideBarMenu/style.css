@@ -1,0 +1,52 @@
+#sideBarMenu {
+  background-color: #0b1c57;
+  margin-right: 10px;
+}
+
+#inputSearchSidebar {
+  box-shadow: 2px 2px 4px #3a3838;
+  position: absolute;
+  z-index: 900;
+  top: 27px;
+  border-radius: 10px;
+  width: 90%;
+  height: 45px;
+}
+#iconMenu {
+  margin-right: 10px;
+}
+#iconMenuBin2 {
+  margin-left: -10px;
+  margin-right: 10px;
+}
+#iconMenuRoute4 {
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
+}
+#mySearch {
+  border-radius: 10px;
+  width: 95%;
+  font-size: 18px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  padding-left: 10px;
+  margin: 10px 10px 10px 10px;
+}
+#myMenu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#myMenu li a {
+  padding: 12px;
+  text-decoration: none;
+  color: white;
+  display: block;
+}
+
+#myMenu li a:hover {
+  background-color: #050e2e;
+  border-radius: 13px;
+}
